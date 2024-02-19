@@ -28,6 +28,18 @@ app.get("/",async(req,res)=>{
     res.json({success : true, data : data})
 })
 
+app.get("/edit/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const data = await userModel.findById(id);
+      res.json(data);
+    } catch (error) {
+      console.error("Error fetching user for editing:", error);
+      res.status(500).json({ success: false, message: "Internal server error" });
+    }
+  });
+  
+
 
 
 app.post("/create", async (req, res) => {
